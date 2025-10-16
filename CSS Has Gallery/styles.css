@@ -1,0 +1,54 @@
+*,*::before,*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  min-height: 100svh;
+  background-color: hsl(20, 30%, 60%);
+  overflow: hidden;
+}
+.gallery {
+  display: flex;
+  gap: 0.4rem;
+  padding: 1rem;
+  .gallery__item {
+    aspect-ratio: 9/14;
+    flex: 1 0 max(100px, 12%);
+    box-shadow: 0 10px 10px -5px rgb(0 0 0 / 30%);
+    filter: grayscale(100%);
+    transition: transform .25s ease-in, filter .25s ease-in;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.gallery__item:has(+ * + *:hover) {
+  transform: scale(1.1) translateY(-5%);
+  filter: grayscale(70%);
+}
+.gallery__item:has(+ *:hover) {
+  transform: scale(1.2) translateY(-10%);
+  filter: grayscale(50%);
+}
+.gallery__item:hover {
+  transform: scale(1.5) translateY(-14%);
+  filter: grayscale(0%);
+  z-index: 5;
+}
+.gallery__item:hover + * {
+  transform: scale(1.2) translateY(-10%);
+  filter: grayscale(50%);
+  z-index: 4;
+}
+.gallery__item:hover + * + * {
+  transform: scale(1.12) translateY(-5%);
+  filter: grayscale(70%);
+  z-index: 3;
+}
